@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <title>MCHUMI FOOD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background-image: linear-gradient(135deg, rgba(255,107,53,0.6) 0%, rgba(247,147,30,0.6) 50%, rgba(253,184,51,0.6) 100%),
+                              url('images/home-bg.jpg.png');
+            background-color: #FDB833;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            margin: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(253, 184, 51, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.3);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .search-box button {
+            padding: 8px 12px;
+            border: none;
+            background: orange;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard {
+            background: green;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .bottom-buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .register { background: blue; color: white; }
+        .login { background: red; color: white; }
+
+        /* Dashboard popup */
+        .dashboard-popup {
+            display: none;
+            position: fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .dashboard-box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .dashboard-box .admin-link {
+            background: black;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .dashboard-box .about-link {
+            background: #4facfe;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .dashboard-box .close-btn {
+            background: red;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+
+    <div class="top-bar">
+        <div class="search-box">
+            <form id="searchForm" action="menu.php" method="get" style="display:flex; gap:8px; align-items:center;">
+                <input type="text" name="q" id="searchInput" placeholder="Tafuta chakula...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="dashboard" id="dashboardBtn">Dashboard</div>
+    </div>
+
+    <div class="slider-text">
+        <span>KARIBU MCHUMI FOOD 🍽️</span>
+    </div>
+
+    <div class="bottom-buttons">
+        <button class="btn register" id="registerBtn">REGISTER</button>
+        <button class="btn login" id="loginBtn">LOGIN</button>
+    </div>
+
+
+
+</div>
+
+<div class="dashboard-popup" id="dashboardPopup">
+    <div class="dashboard-box">
+        <h2>DASHBOARD</h2>
+        <div class="admin-link" id="adminLink">👑 ADMIN</div>
+        <div class="about-link" id="aboutLink">ℹ️ ABOUT</div>
+        <button class="close-btn" id="closeDashboard">Close</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    const dashboardPopup = document.getElementById("dashboardPopup");
+    const closeDashboardBtn = document.getElementById("closeDashboard");
+    const registerBtn = document.getElementById("registerBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const adminLink = document.getElementById("adminLink");
+
+    dashboardBtn.addEventListener("click", function() {
+        dashboardPopup.style.display = "flex";
+    });
+
+    closeDashboardBtn.addEventListener("click", function() {
+        dashboardPopup.style.display = "none";
+    });
+
+    registerBtn.addEventListener("click", function() {
+        window.location.href = "user_register.html";
+    });
+
+    loginBtn.addEventListener("click", function() {
+        window.location.href = "user_login.html";
+    });
+
+    adminLink.addEventListener("click", function() {
+        window.location.href = "admin/login.php";
+    });
+
+    const aboutLink = document.getElementById("aboutLink");
+    aboutLink.addEventListener("click", function() {
+        window.location.href = "about.php";
+    });
+});
+</script>
+
+</body>
+</html>
